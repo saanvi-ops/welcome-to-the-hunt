@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME TO THE HUNT</title>
+    <style>
+        body { 
+            background-color: #060907; 
+            color: #39ff14; 
+            font-family: 'Courier New', monospace; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 85vh; 
+            margin: 0; 
+            overflow: hidden; 
+        }
+        .terminal-interface { 
+            border: 2px solid #39ff14; 
+            background-color: #000000; 
+            padding: 35px; 
+            width: 85%; 
+            max-width: 700px; 
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.15); 
+            border-radius: 4px; 
+            text-align: center;
+        }
+        .system-header { 
+            font-size: 24px; 
+            font-weight: bold; 
+            margin-bottom: 25px; 
+            border-bottom: 2px dashed #39ff14; 
+            padding-bottom: 12px; 
+            letter-spacing: 1px; 
+        }
+        p { 
+            font-size: 17px; 
+            line-height: 1.6; 
+            margin: 15px 0; 
+        }
+        .cursor-blink { 
+            animation: blinker 1.2s step-start infinite; 
+        }
+        @keyframes blinker { 50% { opacity: 0; } }
+        .audio-module { 
+            margin-top: 35px; 
+            background-color: #0a0f0b; 
+            border: 1px solid #1f6610; 
+            padding: 25px; 
+            border-radius: 4px; 
+        }
+        .sync-btn { 
+            background-color: #000000; 
+            color: #39ff14; 
+            border: 2px solid #39ff14; 
+            padding: 14px 35px; 
+            font-family: 'Courier New', monospace; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2); 
+            letter-spacing: 1px;
+        }
+        .sync-btn:hover { 
+            background-color: #39ff14; 
+            color: #000000; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-interface">
+        <div class="system-header">🎉 YOU MADE IT! 🎉</div>
+        
+        <p><strong>STAGE 1:</strong> UNLOCKED</p>
+        <p>--------------------------------------------------</p>
+        <p>Awesome job! You successfully solved the color cipher and found your way here.</p>
+        <p>The hunt has officially begun, and I am so excited for you to see what comes next.</p>
+        <p>Press the button below to listen to your first greeting message, then take a good look around the physical room to continue your journey<span class="cursor-blink">_</span></p>
+        
+        <div class="audio-module">
+            <!-- Central Control Interface -->
+            <button class="sync-btn" id="audioControlBtn" onclick="togglePlayback()">START MESSAGE</button>
+            
+            <!-- Direct Stream Audio Framework Links -->
+            <!-- Upload your audio elements to mp3tourl.com or filebin.net and paste them below -->
+            <audio id="voiceTrack" src="https://mp3tourl.com/audio/1790499177443-c2e2fd1d-a89a-4127-89b7-ddc9aaab6980.mp3" loop></audio>
+            <audio id="tapTrack" src="https://mp3tourl.com/audio/1790499206632-31317a0c-584c-4617-a44b-a6a4262e5925.mp3" loop></audio>
+        </div>
+    </div>
+
+    <script>
+        const voice = document.getElementById('voiceTrack');
+        const taps = document.getElementById('tapTrack');
+        const btn = document.getElementById('audioControlBtn');
+
+        // FIXED PARAMETER: Locks the pen tapping background music mix directly to 20% volume
+        taps.volume = 0.2; 
+
+        function togglePlayback() {
+            if (voice.paused) {
+                taps.currentTime = voice.currentTime;
+                voice.play();
+                taps.play();
+                
+                btn.innerText = "PAUSE MESSAGE";
+                btn.style.borderColor = "#ff3333";
+                btn.style.color = "#ff3333";
+            } else {
+                voice.pause();
+                taps.pause();
+                
+                btn.innerText = "START MESSAGE";
+                btn.style.borderColor = "#39ff14";
+                btn.style.color = "#39ff14";
+            }
+        }
+    </script>
+</body>
+</html>
